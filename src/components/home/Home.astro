@@ -1,0 +1,37 @@
+---
+import { Button } from "@/components/ui/button";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Plus } from "@hugeicons/core-free-icons";
+import Post from "@/components/shared/Post.astro";
+import type { PostProps } from "@/types/post";
+
+// const listOfContent: string[] = new Array(10).fill("string")
+const placeholderPost: PostProps = {
+  img: {
+    src: "https://placehold.co/600x400/6a787b/eee",
+    alt: "placeholder",
+  },
+  post: {
+    title: "This is an interesting title",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit est animi id autem quis officia cupiditate commodo aliqua quas cupiditate dolorem rerum consequatur provident in cupiditate aliquip in imperdiet excepturi praesentium optio quo soluta in deleniti est do praesentium dolor occaecat et do aliqua imperdiet duis ipsum vero sint mollitia amet.",
+    dateTime: new Date(),
+    link: "https://placehold.co"
+  },
+};
+
+const placeholderPosts: PostProps[] = new Array(10).fill(placeholderPost);
+---
+
+<div class="flex flex-row justify-between mb-8">
+  <h1 class="text-3xl">All Posts</h1>
+  <Button size={"lg"}>
+    <HugeiconsIcon icon={Plus} />
+    Create
+  </Button>
+</div>
+<div
+  class="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1"
+>
+  {placeholderPosts.map((post) => <Post img={post.img} post={post.post} />)}
+</div>
