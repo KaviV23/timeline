@@ -11,31 +11,41 @@ import { Image } from "astro:assets";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ChevronRight } from "@hugeicons/core-free-icons";
+import type { CollectionEntry } from "astro:content";
 
-import type { PostProps as Props } from "@/types/post";
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
 
-const { img, post } = Astro.props;
+const { post } = Astro.props;
+
+function getPostViewUrl(postId: string): string {
+  if (!postId) {
+    throw new Error(`Invalid postId: ${postId}`)
+  }
+  const viewerUrl = `/posts/${encodeURIComponent(postId)}`;
+  return viewerUrl;
+}
 ---
 
 <Card>
   <CardHeader>
-    <Image src={img.src} alt={img.alt} width={640} height={400} />
+    <Image src={post.data.image} alt={post.data.imageAlt} width={640} height={400} />
   </CardHeader>
   <CardContent className="flex flex-col h-fit min-h-16 gap-1">
-    <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+    <CardTitle className="line-clamp-2">{post.data.title}</CardTitle>
     <CardDescription className="line-clamp-3">
-      <p>{post.description}</p>
+      <p>{post.data.description}</p>
     </CardDescription>
   </CardContent>
   <CardFooter className="flex flex-row justify-between">
     <CardDescription>
       <div>
-        <p>{post.dateTime.toLocaleDateString()}</p>
-        <p>{post.dateTime.toLocaleTimeString()}</p>
+        <p>{post.data.pubDate.toLocaleDateString()} &#183; {post.data.author}</p>
       </div>
     </CardDescription>
     <a
-      href={post.link}
+      href={getPostViewUrl(post.id)}
     >
       <Button
         size={"lg"}
