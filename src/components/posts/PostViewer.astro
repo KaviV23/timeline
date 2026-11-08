@@ -1,0 +1,46 @@
+---
+import Prose from "@/components/posts/Prose.astro";
+import Page from "@/components/shared/Page.astro";
+import { Button } from "@/components/ui/button";
+import { Home } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import Image from "astro/components/Image.astro";
+import { render, type CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<'posts'>
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<!-- Top bar -->
+<div class="flex justify-start items-center gap-4 sticky top-0 backdrop-blur-sm">
+  <a href="/">
+    <Button className="flex-1" size={"icon-lg"}>
+      <HugeiconsIcon icon={Home}/>
+    </Button>
+  </a>
+  <span class="text-xs text-muted-foreground font-mono">Timeline</span>
+</div>
+<!-- Content -->
+<Page>
+  <!-- Title and date -->
+  <div class="flex flex-col sm:flex-row justify-between sm:items-end items-center mb-8 sm:gap-4 gap-2">
+    <h1 class="flex-1 text-3xl">{post.data.title}</h1>
+    <span class="text-xs text-muted-foreground">{post.data.author} &#183; {post.data.pubDate.toLocaleDateString()}</span>
+  </div>
+  <!-- Content -->
+  <div class="flex flex-col gap-4 max-w-5xl mx-auto">
+    <Image 
+      src={post.data.image}
+      alt={post.data.imageAlt}
+      inferSize
+    />
+    <div>
+      <Prose>
+        <Content />
+      </Prose>
+    </div>
+  </div>
+</Page>

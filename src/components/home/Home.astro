@@ -1,5 +1,5 @@
 ---
-import Post from "@/components/shared/Post.astro";
+import Post from "@/components/home/Post.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts")
@@ -9,7 +9,7 @@ const posts = await getCollection("posts")
   <h1 class="text-3xl">All Posts</h1>
 </div>
 <div
-  class="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1"
+  class="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1"
 >
   {posts.map(
     (post) => (

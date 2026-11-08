@@ -30,7 +30,7 @@ function getPostViewUrl(postId: string): string {
 
 <Card>
   <CardHeader>
-    <Image src={post.data.image} alt={post.data.imageAlt} width={640} height={400} />
+    <Image class="aspect-3/2 object-cover" src={post.data.image} alt={post.data.imageAlt} inferSize />
   </CardHeader>
   <CardContent className="flex flex-col h-fit min-h-16 gap-1">
     <CardTitle className="line-clamp-2">{post.data.title}</CardTitle>
