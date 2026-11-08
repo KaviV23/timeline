@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 <!-- Top bar -->
-<div class="flex justify-start items-center gap-4 sticky top-0 backdrop-blur-sm">
+<div class="flex justify-start items-center gap-4 sticky top-0 bg-muted/10 backdrop-blur-md">
   <a href="/">
     <Button className="flex-1" size={"icon-lg"}>
       <HugeiconsIcon icon={Home}/>
@@ -25,13 +25,7 @@ const { Content } = await render(post);
 </div>
 <!-- Content -->
 <Page>
-  <!-- Title and date -->
-  <div class="flex flex-col sm:flex-row justify-between sm:items-end items-center mb-8 sm:gap-4 gap-2">
-    <h1 class="flex-1 text-3xl">{post.data.title}</h1>
-    <span class="text-sm text-muted-foreground">{post.data.author} &#183; {post.data.pubDate.toLocaleDateString()}</span>
-  </div>
-  <!-- Content -->
-  <div class="flex flex-col gap-4 max-w-5xl mx-auto">
+  <div class="flex flex-col gap-4 max-w-3xl mx-auto">
     <Image 
       class="aspect-video object-cover"
       src={post.data.image}
@@ -43,5 +37,9 @@ const { Content } = await render(post);
         <Content />
       </Prose>
     </div>
+  </div>
+  <!-- Footer -->
+  <div class="flex flex-col mt-10 items-center p-4">
+    <p class="text-sm text-muted-foreground">Authored by {post.data.author} on {post.data.pubDate.toLocaleDateString()}</p>
   </div>
 </Page>

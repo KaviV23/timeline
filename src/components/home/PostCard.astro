@@ -32,7 +32,7 @@ function getPostViewUrl(postId: string): string {
   <CardHeader>
     <Image class="aspect-video object-cover" src={post.data.image} alt={post.data.imageAlt} inferSize />
   </CardHeader>
-  <CardContent className="flex flex-col h-fit min-h-16 gap-1">
+  <CardContent className="flex flex-col h-fit min-h-16 gap-1 flex-1">
     <CardTitle className="line-clamp-2">{post.data.title}</CardTitle>
     <CardDescription className="line-clamp-3">
       <p>{post.data.description}</p>
