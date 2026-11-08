@@ -1,11 +1,11 @@
 ---
-import Post from "@/components/home/Post.astro";
+import Post from "@/components/home/PostCard.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts")
 ---
 
-<div class="flex flex-row justify-between mb-8">
+<div class="flex flex-row sm:justify-between justify-center mb-8">
   <h1 class="text-3xl">All Posts</h1>
 </div>
 <div
